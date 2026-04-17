@@ -36,6 +36,7 @@ class AppSelectionFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         val view = inflater.inflate(R.layout.app_selection_layout, container, false)
+
         prefs = PreferenceManager.getDefaultSharedPreferences(requireContext())
 
         recyclerView = view.findViewById(R.id.recyclerView)
@@ -81,6 +82,7 @@ class AppSelectionFragment : Fragment() {
 
             adapter = AppSelectionAdapter(requireContext(), apps)
             recyclerView.adapter = adapter
+
             progressBar.visibility = View.GONE
             searchView.visibility = View.VISIBLE
         }
