@@ -23,7 +23,6 @@ import io.github.romanvht.byedpi.utility.ClipboardUtils
 import io.github.romanvht.byedpi.utility.DomainListUtils
 
 class DomainListsFragment : Fragment() {
-
     private lateinit var recyclerView: RecyclerView
     private lateinit var adapter: DomainListAdapter
 
@@ -57,6 +56,7 @@ class DomainListsFragment : Fragment() {
         }, viewLifecycleOwner, Lifecycle.State.RESUMED)
 
         DomainListUtils.syncLists(requireContext())
+
         recyclerView = view.findViewById(R.id.domain_lists_recycler)
 
         view.findViewById<View>(R.id.add_new_list_button).setOnClickListener {
@@ -99,6 +99,7 @@ class DomainListsFragment : Fragment() {
 
     private fun showAddDialog() {
         val context = requireContext()
+
         val layout = LinearLayout(context).apply {
             orientation = LinearLayout.VERTICAL
             setPadding(50, 40, 50, 10)
@@ -150,6 +151,7 @@ class DomainListsFragment : Fragment() {
 
     private fun showEditDialog(domainList: DomainList) {
         val context = requireContext()
+
         val layout = LinearLayout(context).apply {
             orientation = LinearLayout.VERTICAL
             setPadding(50, 40, 50, 10)
