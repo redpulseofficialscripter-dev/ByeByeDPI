@@ -37,7 +37,6 @@ class ByeDpiVpnService : LifecycleVpnService() {
         private const val FOREGROUND_SERVICE_ID: Int = 1
         private const val PAUSE_NOTIFICATION_ID: Int = 3
         private const val NOTIFICATION_CHANNEL_ID: String = "ByeDPIVpn"
-
         private var status: ServiceStatus = ServiceStatus.Disconnected
     }
 
@@ -131,6 +130,7 @@ class ByeDpiVpnService : LifecycleVpnService() {
 
     private fun startForeground() {
         val notification: Notification = createNotification()
+
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.UPSIDE_DOWN_CAKE) {
             startForeground(
                 FOREGROUND_SERVICE_ID,
@@ -178,7 +178,6 @@ class ByeDpiVpnService : LifecycleVpnService() {
 
         proxyJob = lifecycleScope.launch(Dispatchers.IO) {
             val code = byeDpiProxy.startProxy(preferences)
-
             delay(500)
 
             if (code != 0) {
@@ -232,17 +231,14 @@ class ByeDpiVpnService : LifecycleVpnService() {
 
         val sharedPreferences = getPreferences()
         val (ip, port) = sharedPreferences.getProxyIpAndPort()
-
         val dns = sharedPreferences.getStringNotNull("dns_ip", "8.8.8.8")
         val ipv6 = sharedPreferences.getBoolean("ipv6_enable", false)
 
         val tun2socksConfig = buildString {
             appendLine("tunnel:")
             appendLine("  mtu: 8500")
-
             appendLine("misc:")
             appendLine("  task-stack-size: 81920")
-
             appendLine("socks5:")
             appendLine("  address: $ip")
             appendLine("  port: $port")
@@ -304,13 +300,11 @@ class ByeDpiVpnService : LifecycleVpnService() {
 
     private fun updateStatus(newStatus: ServiceStatus) {
         Log.d(TAG, "VPN status changed from $status to $newStatus")
-
         status = newStatus
 
         setStatus(
             when (newStatus) {
                 ServiceStatus.Connected -> AppStatus.Running
-
                 ServiceStatus.Disconnected,
                 ServiceStatus.Failed -> {
                     proxyJob = null
@@ -359,6 +353,7 @@ class ByeDpiVpnService : LifecycleVpnService() {
 
     private fun createBuilder(dns: String, ipv6: Boolean): Builder {
         Log.d(TAG, "DNS: $dns")
+
         val builder = Builder()
         builder.setSession("ByeDPI")
         builder.setConfigureIntent(
@@ -396,10 +391,9 @@ class ByeDpiVpnService : LifecycleVpnService() {
                     try {
                         builder.addDisallowedApplication(packageName)
                     } catch (e: Exception) {
-                        Log.e(TAG, "Не удалось добавить приложение $packageName в черный список", e)
+                        Log.e(TAG, "Failed to add disallowed application $packageName to blacklist", e)
                     }
                 }
-
                 builder.addDisallowedApplication(applicationContext.packageName)
             }
 
@@ -408,7 +402,7 @@ class ByeDpiVpnService : LifecycleVpnService() {
                     try {
                         builder.addAllowedApplication(packageName)
                     } catch (e: Exception) {
-                        Log.e(TAG, "Не удалось добавить приложение $packageName в белый список", e)
+                        Log.e(TAG, "Failed to add allowed application $packageName to whitelist", e)
                     }
                 }
             }
