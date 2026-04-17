@@ -63,7 +63,6 @@ class MainActivity : BaseActivity() {
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { log ->
             lifecycleScope.launch(Dispatchers.IO) {
                 val logs = collectLogs()
-
                 if (logs == null) {
                     Toast.makeText(
                         this@MainActivity,
@@ -91,7 +90,6 @@ class MainActivity : BaseActivity() {
     private val receiver = object : BroadcastReceiver() {
         override fun onReceive(context: Context?, intent: Intent?) {
             Log.d(TAG, "Received intent: ${intent?.action}")
-
             if (intent == null) {
                 Log.w(TAG, "Received null intent")
                 return
@@ -124,7 +122,6 @@ class MainActivity : BaseActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
@@ -166,7 +163,6 @@ class MainActivity : BaseActivity() {
 
         binding.settingsButton.setOnClickListener {
             val (status, _) = appStatus
-
             if (status == AppStatus.Halted) {
                 val intent = Intent(this, SettingsActivity::class.java)
                 startActivity(intent)
@@ -177,7 +173,6 @@ class MainActivity : BaseActivity() {
 
         binding.editorButton.setOnClickListener {
             val useCmdSettings = getPreferences().getBoolean("byedpi_enable_cmd_settings", false)
-
             if (!useCmdSettings && appStatus.first == AppStatus.Running) {
                 Toast.makeText(this, R.string.settings_unavailable, Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
@@ -293,13 +288,12 @@ class MainActivity : BaseActivity() {
 
         val preferences = getPreferences()
         val (ip, port) = preferences.getProxyIpAndPort()
-
         binding.proxyAddress.text = getString(R.string.proxy_address, ip, port)
 
         when (status) {
             AppStatus.Halted -> {
                 val typedValue = android.util.TypedValue()
-                theme.resolveAttribute(android.R.attr.colorPrimary, typedValue,true)
+                theme.resolveAttribute(android.R.attr.colorPrimary, typedValue, true)
                 binding.statusButtonCard.setCardBackgroundColor(typedValue.data)
                 binding.statusButtonIcon.clearColorFilter()
 
