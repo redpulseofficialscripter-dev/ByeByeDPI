@@ -60,7 +60,6 @@
                         android:text="@string/open_editor"
                         android:textSize="14sp"
                         android:textColor="?android:textColorPrimary" />
-
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
 
@@ -98,10 +97,8 @@
                         android:text="@string/title_settings"
                         android:textSize="14sp"
                         android:textColor="?android:textColorPrimary" />
-
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
-
         </LinearLayout>
 
         <LinearLayout
@@ -147,7 +144,6 @@
                         android:text="@string/main_btn_test"
                         android:textSize="14sp"
                         android:textColor="?android:textColorPrimary" />
-
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
 
@@ -185,12 +181,9 @@
                         android:text="@string/main_btn_list"
                         android:textSize="14sp"
                         android:textColor="?android:textColorPrimary" />
-
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
-
         </LinearLayout>
-
     </LinearLayout>
 
     <FrameLayout
@@ -226,7 +219,6 @@
                     android:src="@drawable/ic_power"
                     android:contentDescription="@string/vpn_connect"
                     app:tint="?attr/colorOnPrimary" />
-
             </com.google.android.material.card.MaterialCardView>
 
             <com.google.android.material.textview.MaterialTextView
@@ -245,8 +237,6 @@
                 android:textSize="14sp"
                 android:textColor="?android:textColorSecondary"
                 tools:text="127.0.0.1:1080" />
-
         </LinearLayout>
     </FrameLayout>
-
 </RelativeLayout>
