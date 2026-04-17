@@ -66,7 +66,6 @@ fun SharedPreferences.checkIpAndPortInCmd(): Pair<String?, String?> {
     return Pair(cmdIp, cmdPort)
 }
 
-
 fun SharedPreferences.getProxyIpAndPort(): Pair<String, String> {
     val (cmdIp, cmdPort) = checkIpAndPortInCmd()
 
